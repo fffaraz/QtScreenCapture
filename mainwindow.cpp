@@ -88,7 +88,8 @@ void MainWindow::timer_timeout()
     if (!screen) return;
     QPixmap pixmap = screen->grabWindow(0);
     qDebug() << pixmap.size();
-    pixmap = pixmap.scaled(pixmap.size() * (ui->spnSize->text().toInt() / 100.0), Qt::KeepAspectRatio);
+    if(ui->spnSize->text().toInt() != 100)
+        pixmap = pixmap.scaled(pixmap.size() * (ui->spnSize->text().toInt() / 100.0), Qt::KeepAspectRatio);
     qDebug() << pixmap.size();
     QString file = QDateTime::currentDateTime().toString(dateformat + "_zzz");
     QString path = ui->txtPath->text() + "/" + file + "." + ui->cmbFormat->currentText().toLower();
