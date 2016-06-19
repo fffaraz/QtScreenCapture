@@ -29,8 +29,14 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    bool recording = false;
     QTimer timer;
+    bool recording = false;
+    int counter = 0;
+    int totalsize = 0;
+    QStringList list;
+    QDateTime start;
+    QDateTime end;
+    const QString dateformat = "yyyy-MM-dd_HH-mm-ss";
 };
 
 #endif // MAINWINDOW_H
