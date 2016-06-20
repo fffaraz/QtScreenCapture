@@ -37,16 +37,13 @@ void MainWindow::on_btnStart_clicked()
         start = QDateTime::currentDateTime();
         timer.start(ui->spnInterval->text().toInt() * 1000);
         recording = true;
+        qApp->processEvents();
         timer_timeout();
     }
     else
     {
         timer.stop();
         timer_timeout();
-        ui->lblStatus->clear();
-        ui->groupBox->setEnabled(true);
-        ui->btnStart->setText("Start");
-        recording = false;
         end = QDateTime::currentDateTime();
         QFile file(ui->txtPath->text() + "/report_" + start.toString(dateformat) + ".txt");
         file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -80,6 +77,11 @@ void MainWindow::on_btnStart_clicked()
         }
         file.write("\n");
         file.close();
+        //---
+        ui->lblStatus->setText(file.fileName());
+        ui->groupBox->setEnabled(true);
+        ui->btnStart->setText("Start");
+        recording = false;
     }
 }
 
@@ -87,8 +89,8 @@ void MainWindow::timer_timeout()
 {
     counter++;
     QScreen *screen = QGuiApplication::primaryScreen();
-    if (const QWindow *window = windowHandle()) screen = window->screen();
-    if (!screen) return;
+    if(const QWindow *window = windowHandle()) screen = window->screen();
+    if(!screen) return;
     QPixmap pixmap = screen->grabWindow(0);
     qDebug() << pixmap.size();
     if(ui->spnSize->text().toInt() != 100)
