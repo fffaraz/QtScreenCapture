@@ -48,7 +48,7 @@ void MainWindow::on_btnStart_clicked()
         ui->btnStart->setText("Start");
         recording = false;
         end = QDateTime::currentDateTime();
-        QFile file(ui->txtPath->text() + "/report-" + start.toString(dateformat) + ".txt");
+        QFile file(ui->txtPath->text() + "/report_" + start.toString(dateformat) + ".txt");
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         file.write("Start: ");
         file.write(start.toString(dateformat).toUtf8());
