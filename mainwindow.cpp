@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&timer, SIGNAL(timeout()), this, SLOT(timer_timeout()));
     QList<QByteArray> formats = QImageWriter::supportedImageFormats();
     for (int i = 0; i < formats.size(); ++i) ui->cmbFormat->insertItem(i, formats[i]);
-    ui->cmbFormat->setCurrentText("jpeg");
+    ui->cmbFormat->setCurrentText("webp");
 }
 
 MainWindow::~MainWindow()
