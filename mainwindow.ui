@@ -58,21 +58,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="cmbFormat">
-           <property name="currentText">
-            <string>JPG</string>
-           </property>
-           <item>
-            <property name="text">
-             <string>JPG</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>PNG</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QComboBox" name="cmbFormat"/>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
@@ -111,6 +97,9 @@
            </property>
            <property name="maximum">
             <number>100</number>
+           </property>
+           <property name="singleStep">
+            <number>10</number>
            </property>
            <property name="value">
             <number>50</number>

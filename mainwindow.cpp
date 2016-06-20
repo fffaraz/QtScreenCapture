@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()), this, SLOT(timer_timeout()));
+    QList<QByteArray> formats = QImageWriter::supportedImageFormats();
+    for (int i = 0; i < formats.size(); ++i) ui->cmbFormat->insertItem(i, formats[i]);
+    ui->cmbFormat->setCurrentText("jpeg");
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +60,7 @@ void MainWindow::on_btnStart_clicked()
         file.write("\nPath: ");
         file.write(ui->txtPath->text().toUtf8());
         file.write("\nFormat: ");
-        file.write(ui->cmbFormat->currentText().toLower().toUtf8());
+        file.write(ui->cmbFormat->currentText().toUtf8());
         file.write("\nInterval: ");
         file.write(ui->spnInterval->text().toUtf8());
         file.write("\nSize: ");
@@ -92,7 +95,7 @@ void MainWindow::timer_timeout()
         pixmap = pixmap.scaled(pixmap.size() * (ui->spnSize->text().toInt() / 100.0), Qt::KeepAspectRatio);
     qDebug() << pixmap.size();
     QString file = QDateTime::currentDateTime().toString(dateformat + "_zzz");
-    QString path = ui->txtPath->text() + "/" + file + "." + ui->cmbFormat->currentText().toLower();
+    QString path = ui->txtPath->text() + "/" + file + "." + ui->cmbFormat->currentText();
     qDebug() << path;
     pixmap.save(path, ui->cmbFormat->currentText().toStdString().c_str(), ui->spnQuality->text().toInt());
     int size = QFile(path).size();

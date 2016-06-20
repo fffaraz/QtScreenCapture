@@ -9,6 +9,7 @@
 #include <QScreen>
 #include <QWindow>
 #include <QDebug>
+#include <QImageWriter>
 
 namespace Ui {
 class MainWindow;
